@@ -1,0 +1,283 @@
+/*
+ * Copyright (c) 2016 Fuzhou Rockchip Electronics Co., Ltd
+ *
+ * This file is dual-licensed: you can use it either under the terms
+ * of the GPL or the X11 license, at your option. Note that this dual
+ * licensing only applies to this file, and not this project as a
+ * whole.
+ *
+ *  a) This file is free software; you can redistribute it and/or
+ *     modify it under the terms of the GNU General Public License as
+ *     published by the Free Software Foundation; either version 2 of the
+ *     License, or (at your option) any later version.
+ *
+ *     This file is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ * Or, alternatively,
+ *
+ *  b) Permission is hereby granted, free of charge, to any person
+ *     obtaining a copy of this software and associated documentation
+ *     files (the "Software"), to deal in the Software without
+ *     restriction, including without limitation the rights to use,
+ *     copy, modify, merge, publish, distribute, sublicense, and/or
+ *     sell copies of the Software, and to permit persons to whom the
+ *     Software is furnished to do so, subject to the following
+ *     conditions:
+ *
+ *     The above copyright notice and this permission notice shall be
+ *     included in all copies or substantial portions of the Software.
+ *
+ *     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ *     EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+ *     OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+ *     NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ *     HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ *     WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+ *     OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+/dts-v1/;
+#include "rk3399-10moons-evb.dtsi"
+
+/ {
+	model = "Rockchip RK3399 Board 10moons (BOX)";
+	compatible = "rockchip-box-10moons","rockchip,rk3399-box";
+			
+	leds: gpio-leds {
+		compatible = "gpio-leds";
+		pinctrl-names = "default";
+		pinctrl-0 =<&leds_gpio>;
+
+		led@1 {
+			gpios = <&gpio4 29 GPIO_ACTIVE_HIGH>;
+			label = "red";
+			linux,default-trigger="default-off";
+		};
+
+		led@2 {
+			gpios = <&gpio4 28 GPIO_ACTIVE_HIGH>;
+			label = "green";
+			linux,default-trigger="default-off";
+		};
+
+		led@3 {
+			gpios = <&gpio0 12 GPIO_ACTIVE_HIGH>;
+			label = "power";
+			linux,default-trigger="default-on";
+		};
+
+	};
+};
+
+&pinctrl {
+	pinctrl-names = "default";
+	pinctrl-0 = <&cpt_gpio>;
+	
+	hdmiin {
+		hdmiin_gpios: hdmiin_gpios {
+		rockchip,pins =
+				<1 0 RK_FUNC_GPIO &pcfg_pull_none>,
+				<1 1 RK_FUNC_GPIO &pcfg_pull_none>,
+				<1 4 RK_FUNC_GPIO &pcfg_pull_none>,
+				<1 7 RK_FUNC_GPIO &pcfg_pull_none>,
+				<1 8 RK_FUNC_GPIO &pcfg_pull_none>,
+				<1 9 RK_FUNC_GPIO &pcfg_pull_none>,
+				<1 10 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
+	
+	gpio-leds {
+		leds_gpio: leds-gpio {
+			rockchip,pins =
+				<0 12 RK_FUNC_GPIO &pcfg_pull_up>,
+				<4 28 RK_FUNC_GPIO &pcfg_pull_up>,
+				<4 29 RK_FUNC_GPIO &pcfg_pull_up>;
+		};
+	};
+	
+	sdio0 {
+		sdio0_bus1: sdio0-bus1 {
+			rockchip,pins =
+				<2 20 RK_FUNC_1 &pcfg_pull_up_20ma>;
+		};
+
+		sdio0_bus4: sdio0-bus4 {
+			rockchip,pins =
+				<2 20 RK_FUNC_1 &pcfg_pull_up_20ma>,
+				<2 21 RK_FUNC_1 &pcfg_pull_up_20ma>,
+				<2 22 RK_FUNC_1 &pcfg_pull_up_20ma>,
+				<2 23 RK_FUNC_1 &pcfg_pull_up_20ma>;
+		};
+
+		sdio0_cmd: sdio0-cmd {
+			rockchip,pins =
+				<2 24 RK_FUNC_1 &pcfg_pull_up_20ma>;
+		};
+
+		sdio0_clk: sdio0-clk {
+			rockchip,pins =
+				<2 25 RK_FUNC_1 &pcfg_pull_none_20ma>;
+		};
+	};
+
+	sdmmc {
+		sdmmc_bus1: sdmmc-bus1 {
+			rockchip,pins =
+				<4 8 RK_FUNC_1 &pcfg_pull_up_8ma>;
+		};
+
+		sdmmc_bus4: sdmmc-bus4 {
+			rockchip,pins =
+				<4 8 RK_FUNC_1 &pcfg_pull_up_8ma>,
+				<4 9 RK_FUNC_1 &pcfg_pull_up_8ma>,
+				<4 10 RK_FUNC_1 &pcfg_pull_up_8ma>,
+				<4 11 RK_FUNC_1 &pcfg_pull_up_8ma>;
+		};
+
+		sdmmc_clk: sdmmc-clk {
+			rockchip,pins =
+				<4 12 RK_FUNC_1 &pcfg_pull_none_18ma>;
+		};
+
+		sdmmc_cmd: sdmmc-cmd {
+			rockchip,pins =
+				<4 13 RK_FUNC_1 &pcfg_pull_up_8ma>;
+		};
+	};
+
+	fusb30x {
+		fusb0_int: fusb0-int {
+			rockchip,pins =
+				<1 2 RK_FUNC_GPIO &pcfg_pull_up>;
+		};
+	};
+
+	compat {
+		cpt_gpio: cpt-gpio {
+			rockchip,pins =
+				<1 18 RK_FUNC_GPIO &pcfg_pull_up>,
+				<0 2 RK_FUNC_GPIO &pcfg_pull_up>;
+		};
+	};
+	
+};
+
+&i2c4 {
+	status = "okay";
+	fusb0: fusb30x@22 {
+		compatible = "fairchild,fusb302";
+		reg = <0x22>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&fusb0_int>;
+		vbus-5v-gpios = <&gpio1 3 GPIO_ACTIVE_LOW>;
+		int-n-gpios = <&gpio1 2 GPIO_ACTIVE_HIGH>;
+		status = "okay";
+	};
+	
+	tc358749xx: tc358749xx@0f {
+		compatible = "toshiba,tc358749x";
+		reg = <0x0f>;
+		status = "okay";
+	};
+};
+
+&i2c1 {
+	status = "okay";
+	i2c-scl-rising-time-ns = <300>;
+	i2c-scl-falling-time-ns = <15>;
+
+	rt5651: rt5651@1a {
+		#sound-dai-cells = <0>;
+		compatible = "rockchip,rt5651";
+		reg = <0x1a>;
+		clocks = <&cru SCLK_I2S_8CH_OUT>;
+		clock-names = "mclk";
+		pinctrl-names = "default";
+		pinctrl-0 = <&i2s_8ch_mclk>;
+		spk-con-gpio = <&gpio0 11 GPIO_ACTIVE_HIGH>;
+		hp-det-gpio = <&gpio1 18 GPIO_ACTIVE_LOW>;
+	};
+	
+	camera: camera@20 {
+		compatible = "rockchip,rk3399";
+		reg = <0x20>;
+	};
+	
+	tc358749x: tc358749x@0f {
+		compatible = "toshiba,tc358749x";
+		reg = <0x0f>;
+//		power-gpios = <&gpio1 8 GPIO_ACTIVE_HIGH>;
+//		power18-gpios = <&gpio1 4 GPIO_ACTIVE_HIGH>;
+		power33-gpios = <&gpio1 9 GPIO_ACTIVE_HIGH>;
+//		csi-ctl-gpios = <&gpio1 0 GPIO_ACTIVE_HIGH>;
+		stanby-gpios = <&gpio1 10 GPIO_ACTIVE_HIGH>;
+		reset-gpios = <&gpio1 1 GPIO_ACTIVE_HIGH>;
+		int-gpios = <&gpio1 4 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&hdmiin_gpios>;
+		status = "okay";
+	};
+};
+	
+&cdn_dp {
+	status = "okay";
+	extcon = <&fusb0>;
+};
+
+&hdmi_in_vopl {
+	status = "disabled";
+};
+
+&dp_in_vopb {
+	status = "disabled";
+};
+
+&route_hdmi {
+	status = "okay";
+};
+
+&hdmi {
+	status = "okay";
+	rockchip,phy-table =
+		<74250000 0x8009 0x0004 0x0272>,
+		<165000000 0x802b 0x0004 0x0209>,
+		<297000000 0x8039 0x0005 0x028d>,
+		<594000000 0x8039 0x0000 0x019d>,
+		<000000000 0x0000 0x0000 0x0000>;
+};
+
+
+&isp0 {
+	status = "okay";
+	rockchip,gpios = <&gpio1 0 GPIO_ACTIVE_HIGH>;
+};
+
+&isp0_mmu {
+	status = "okay";
+};
+
+&isp1 {
+	status = "okay";
+};
+
+&isp1_mmu {
+	status = "okay";
+};
+
+&vopb {
+	assigned-clocks = <&cru DCLK_VOP0_DIV>;
+	assigned-clock-parents = <&cru PLL_VPLL>;
+};
+
+&vopl {
+	assigned-clocks = <&cru DCLK_VOP1_DIV>;
+	assigned-clock-parents = <&cru PLL_CPLL>;
+};
+
+&uart4 {
+	status = "okay";
+};
