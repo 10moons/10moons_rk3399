@@ -1,0 +1,7 @@
+add_lunch_combo rk3399_box-userdebug
+add_lunch_combo rk3399_box-user
+add_lunch_combo rk3399_mid-userdebug
+add_lunch_combo rk3399_mid-user
+add_lunch_combo rk3399_10moons_box-userdebug
+add_lunch_combo rk3399_10moons_box-user
+add_lunch_combo rk3399_10moons_box-eng
