@@ -1,0 +1,16 @@
+out/
+rockdev/
+RKTools/
+kernel/kernel.img
+kernel/resource.img
+
+
+kernel/include/config/auto.conf
+kernel/include/config/auto.conf.cmd
+kernel/include/config/tristate.conf
+kernel/include/generated/autoconf.h
+kernel/include/generated/compile.h
+
+hardware/rockchip/hwcomposer/version.h
+hardware/rockchip/librga/version.h
+hardware/rockchip/omx_il/include/rockchip/git_info.h
